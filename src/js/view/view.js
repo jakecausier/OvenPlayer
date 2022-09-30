@@ -29,8 +29,8 @@ import {
 
 import '../../stylesheet/ovenplayer.less';
 
-const View = function($container){
-    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", api = null, autoHideTimer = "", playerState = STATE_IDLE;
+const View = function($container, api){
+    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", autoHideTimer = "", playerState = STATE_IDLE;
     let isShiftPressed = false;
     let isLiveMode = false;
     let panelManager = PanelManager();
