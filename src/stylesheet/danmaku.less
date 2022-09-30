@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+.op-danmaku {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.op-controls {
+	.op-danmaku-text-container {
+		display: flex;
+		align-items: center;
+
+		.op-danmaku-text-button {
+			display: flex;
+			align-items: center;
+			width: 30px;
+			height: 30px;
+	  		margin-right: 12px;
+		}
+		.op-danmaku-text-input {
+			height: 30px;
+			opacity: 0;
+			appearance: none;
+			pointer-events: none;
+			margin-right: 12px;
+			-moz-transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+      		-webkit-transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+      		transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+
+			&.active {
+				opacity: 1;
+				pointer-events: auto;
+				-moz-transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+      			-webkit-transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+      			transition: opacity .4s cubic-bezier(0.0,0.0,0.2,1);
+			}
+		}
+	}
+}

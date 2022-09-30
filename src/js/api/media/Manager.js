@@ -4,7 +4,13 @@
  *
  * */
 import {getBrowser} from "utils/browser";
-import {PROVIDER_DASH, PROVIDER_HLS, PROVIDER_WEBRTC, PROVIDER_HTML5, PROVIDER_RTMP} from "api/constants";
+import {
+    PROVIDER_DASH,
+    PROVIDER_HLS,
+    PROVIDER_WEBRTC,
+    PROVIDER_HTML5,
+    PROVIDER_RTMP
+} from "api/constants";
 import LA$ from "utils/likeA$.js";
 import {version} from 'version';
 

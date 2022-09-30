@@ -7,6 +7,7 @@ const Controls = function(uiText, hasPlaylist){
                 `<div class="op-controls op-clear">` +
                     `<div class="op-left-controls op-clear"></div>` +
                     `<div class="op-right-controls op-clear">`+
+                        `<div class="danmaku-message-holder op-navigators op-clear"></div>`+
                         `<div class="playlist-holder op-navigators op-clear">${hasPlaylist?`<button class="op-button op-playlist-button"><i class="op-con op-playlist-icon"></i></button>`:``}</div>`+
                         `<div class="setting-holder op-navigators op-clear"></div>`+
                         `<div class="fullscreen-holder op-navigators op-clear"></div>`+

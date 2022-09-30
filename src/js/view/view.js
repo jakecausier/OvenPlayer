@@ -32,6 +32,7 @@ import '../../stylesheet/ovenplayer.less';
 const View = function($container){
     let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", api = null, autoHideTimer = "", playerState = STATE_IDLE;
     let isShiftPressed = false;
+    let isLiveMode = false;
     let panelManager = PanelManager();
     let screenSize = "";
     let currentPlayerSize = "";
@@ -152,6 +153,11 @@ const View = function($container){
             }
         });
 
+        api.on(CONTENT_META, function (metadata) {
+            if (metadata.duration > 9000000000000000 || metadata.duration === Infinity) {
+                isLiveMode = true;
+            }
+        }, template);
     };
     const onDestroyed = function(){
         if(helper){
@@ -239,47 +245,50 @@ const View = function($container){
         },
         "keydown .ovenplayer" : function(event, $current, template){
             let frameMode = api.getFramerate();
-            switch(event.keyCode){
-                case 16 :   //shift
-                    event.preventDefault();
-                    isShiftPressed = true;
-                    break;
-                case 32 :   //space
-                    event.preventDefault();
-                    togglePlayPause();
-                    break;
-                case 37 : //arrow left
-                    event.preventDefault();
 
-                    if (!api.getConfig().disableSeekUI) {
-                        if(isShiftPressed && frameMode){
-                            api.seekFrame(-1);
-                        }else{
-                            seek(5, true);
+            if (!isLiveMode) {
+                switch(event.keyCode){
+                    case 16 :   //shift
+                        event.preventDefault();
+                        isShiftPressed = true;
+                        break;
+                    case 32 :   //space
+                        event.preventDefault();
+                        togglePlayPause();
+                        break;
+                    case 37 : //arrow left
+                        event.preventDefault();
+
+                        if (!api.getConfig().disableSeekUI) {
+                            if(isShiftPressed && frameMode){
+                                api.seekFrame(-1);
+                            }else{
+                                seek(5, true);
+                            }
                         }
-                    }
-                    break;
-                case 39 : //arrow right
-                    event.preventDefault();
+                        break;
+                    case 39 : //arrow right
+                        event.preventDefault();
 
-                    if (!api.getConfig().disableSeekUI) {
+                        if (!api.getConfig().disableSeekUI) {
 
-                        if(isShiftPressed && frameMode){
-                            api.seekFrame(1);
-                        }else{
-                            seek(5, false);
+                            if(isShiftPressed && frameMode){
+                                api.seekFrame(1);
+                            }else{
+                                seek(5, false);
+                            }
                         }
-                    }
 
-                    break;
-                case 38 : //arrow up
-                    event.preventDefault();
-                    volume(true);
-                    break;
-                case 40 : //arrow up
-                    event.preventDefault();
-                    volume(false);
-                    break;
+                        break;
+                    case 38 : //arrow up
+                        event.preventDefault();
+                        volume(true);
+                        break;
+                    case 40 : //arrow up
+                        event.preventDefault();
+                        volume(false);
+                        break;
+                }
             }
 
         },

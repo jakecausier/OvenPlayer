@@ -25,7 +25,7 @@ const ContextPanel = function($container, api, position){
             event.preventDefault();
 
             window.open(
-                'https://github.com/AirenSoft/OvenPlayer',
+                event.target.getAttribute('data-href'),
                 '_blank'
             );
         }

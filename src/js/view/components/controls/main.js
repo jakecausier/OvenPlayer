@@ -11,6 +11,7 @@ import PlaylistPanel from "view/components/controls/playlistPanel";
 import LA$ from 'utils/likeA$';
 import TimeDisplay from "view/components/controls/timeDisplay";
 import FullScreenButton from "view/components/controls/fullScreenButton";
+import DanmakuMessageButton from 'view/components/controls/danmakuMessageButton';
 
 import {
     READY,
@@ -31,7 +32,7 @@ import {PLAYER_WEBRTC_WS_ERROR} from "../../../api/constants";
 
 const Controls = function ($container, api) {
 
-    let volumeButton = "", playButton = "", settingButton = "", progressBar = "", timeDisplay = "", fullScreenButton = "", frameButtons = "", hasPlaylist = false, initialDuration;
+    let volumeButton = "", playButton = "", settingButton = "", progressBar = "", timeDisplay = "", fullScreenButton = "", danmakuMessageButton = "", frameButtons = "", hasPlaylist = false, initialDuration;
     let uiInited = false;
     let webrtc_is_p2p_mode = false;
     let isLiveMode = false;
@@ -96,6 +97,13 @@ const Controls = function ($container, api) {
             fullScreenButton = FullScreenButton($current.find(".fullscreen-holder"), api);
         }
 
+        function initDanmakuTextButton() {
+            if (danmakuMessageButton) {
+                return;
+            }
+            danmakuMessageButton = DanmakuMessageButton($current.find('.danmaku-message-holder'), api);
+        }
+
         function makeControlUI(metadata) {
 
             if (metadata.duration > 9000000000000000) {
@@ -116,6 +124,7 @@ const Controls = function ($container, api) {
 
             initTimeDisplay(metadata);
             initFullscreenButton();
+            initDanmakuTextButton();
 
             if (api.getFramerate && api.getFramerate() > 0) {
                 // initFrameJumpButtons();
@@ -152,6 +161,7 @@ const Controls = function ($container, api) {
 
             initSettingButton();
             initFullscreenButton();
+            initDanmakuTextButton();
 
             $root.removeClass("linear-ad");
         }
@@ -168,6 +178,7 @@ const Controls = function ($container, api) {
             initSettingButton();
         }
         initFullscreenButton();
+        initDanmakuTextButton();
 
         api.on(READY, function () {
             $current.show();
@@ -291,6 +302,9 @@ const Controls = function ($container, api) {
         }
         if (fullScreenButton) {
             fullScreenButton.destroy();
+        }
+        if (danmakuMessageButton) {
+            danmakuMessageButton.destroy();
         }
         if (volumeButton) {
             volumeButton.destroy();

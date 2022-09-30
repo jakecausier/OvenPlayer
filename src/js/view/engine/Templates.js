@@ -1,7 +1,6 @@
 /**
  * Created by hoho on 2018. 7. 20..
  */
-import TextViewTemplate from 'view/example/textviewTemplate';
 import ViewTemplate from 'view/viewTemplate';
 import HelpersTemplate from 'view/components/helpers/mainTemplate';
 import BigButtonTemplate from 'view/components/helpers/bigButtonTemplate';
@@ -29,8 +28,10 @@ import CaptionPanelTemplate from 'view/components/controls/settingPanel/mainTemp
 import TimeDisplayPanelTemplate from 'view/components/controls/settingPanel/mainTemplate';
 import PlaylistPanelTemplate from 'view/components/controls/playlistPanelTemplate';
 
+import DanmakuTemplate from 'view/danmaku/danmakuTemplate';
+import DanmakuMessageButtonTemplate from 'view/components/controls/danmakuMessageButtonTemplate';
+
 const Templates = {
-    TextViewTemplate,
     ViewTemplate,
     HelpersTemplate,
     BigButtonTemplate,
@@ -55,7 +56,10 @@ const Templates = {
     QualityPanelTemplate,
     CaptionPanelTemplate,
     TimeDisplayPanelTemplate,
-    PlaylistPanelTemplate
+    PlaylistPanelTemplate,
+
+    DanmakuTemplate,
+    DanmakuMessageButtonTemplate
 };
 
 export default Templates;

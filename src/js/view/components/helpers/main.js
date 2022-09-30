@@ -8,6 +8,9 @@ import CaptionViewer from "view/components/helpers/captionViewer";
 import Thumbnail from "view/components/helpers/thumbnail";
 import WaterMark from "view/components/helpers/waterMark";
 import Spinner from "view/components/helpers/spinner";
+
+import Danmaku from "view/danmaku/danmaku";
+
 import {
     READY,
     ERROR,
@@ -36,7 +39,7 @@ import {
 
 const Helpers = function($container, api){
     let firstRun = false;
-    let bigButton = "", messageBox = "",  captionViewer = "", spinner = "", thumbnail, waterMark;
+    let bigButton = "", messageBox = "",  captionViewer = "", spinner = "", thumbnail, waterMark, danmaku;
     let mutedMessage = null;
     let hasThumbnail = api.getConfig().image || api.getConfig().title;
     let hasWaterMark = api.getConfig().waterMark && api.getConfig().waterMark.image ||
@@ -103,6 +106,10 @@ const Helpers = function($container, api){
 
             waterMark = WaterMark($current, api, api.getConfig());
         }
+        function createDanmakuContainer()
+        {
+            danmaku = Danmaku($current, api, 'Hello Danmaku');
+        }
 
         spinner = Spinner($current, api);
 
@@ -119,9 +126,8 @@ const Helpers = function($container, api){
             if(hasWaterMark) {
                 createWaterMark();
             }
-
-            if (!firstRun) {
-
+            if(!firstRun) {
+                createDanmakuContainer();
                 createBigButton(STATE_PAUSED);
                 firstRun = true;
             }
@@ -230,6 +236,7 @@ const Helpers = function($container, api){
             }
 
          }, template);
+
         api.on(ERROR, function(error) {
 
             if (error.code === 510) {
@@ -262,7 +269,6 @@ const Helpers = function($container, api){
 
             createMessage(message, description, null, UI_ICONS.op_warning , null, true);
         }, template);
-
 
         api.on(NETWORK_UNSTABLED, function(event){
             let message = "Because the network connection is unstable, the following media source will be played.";
