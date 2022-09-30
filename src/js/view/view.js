@@ -29,10 +29,9 @@ import {
 
 import '../../stylesheet/ovenplayer.less';
 
-const View = function($container, api){
+const View = function($container){
     let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", autoHideTimer = "", playerState = STATE_IDLE;
     let isShiftPressed = false;
-    let isLiveMode = false;
     let panelManager = PanelManager();
     let screenSize = "";
     let currentPlayerSize = "";
@@ -152,12 +151,6 @@ const View = function($container, api){
                 }
             }
         });
-
-        api.on(CONTENT_META, function (metadata) {
-            if (metadata.duration > 9000000000000000 || metadata.duration === Infinity) {
-                isLiveMode = true;
-            }
-        }, template);
     };
     const onDestroyed = function(){
         if(helper){
@@ -369,6 +362,12 @@ const View = function($container, api){
                 }else{
                     setHide(false);
                 }
+            }
+        });
+
+        api.on(CONTENT_META, function (data) {
+            if (data.duration > 9000000000000000 || data.duration === Infinity) {
+                isLiveMode = true;
             }
         });
 
