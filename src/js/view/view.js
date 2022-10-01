@@ -30,8 +30,9 @@ import {
 import '../../stylesheet/ovenplayer.less';
 
 const View = function($container){
-    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", autoHideTimer = "", playerState = STATE_IDLE;
+    let viewTemplate = "", controls = "", helper = "", $playerRoot, contextPanel = "", api = null, autoHideTimer = "", playerState = STATE_IDLE;
     let isShiftPressed = false;
+    let isLiveMode = false;
     let panelManager = PanelManager();
     let screenSize = "";
     let currentPlayerSize = "";

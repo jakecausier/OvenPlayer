@@ -36,7 +36,6 @@ const Controls = function ($container, api) {
     let uiInited = false;
     let webrtc_is_p2p_mode = false;
     let isLiveMode = false;
-
     let browser = api.getConfig().browser;
     let isAndroid = browser.os === "Android";
     let isIOS = browser.os === "iOS";
@@ -124,7 +123,7 @@ const Controls = function ($container, api) {
 
             initTimeDisplay(metadata);
             initFullscreenButton();
-            initDanmakuTextButton();
+            // initDanmakuTextButton();
 
             if (api.getFramerate && api.getFramerate() > 0) {
                 // initFrameJumpButtons();
@@ -161,7 +160,7 @@ const Controls = function ($container, api) {
 
             initSettingButton();
             initFullscreenButton();
-            initDanmakuTextButton();
+            // initDanmakuTextButton();
 
             $root.removeClass("linear-ad");
         }
@@ -178,7 +177,7 @@ const Controls = function ($container, api) {
             initSettingButton();
         }
         initFullscreenButton();
-        initDanmakuTextButton();
+        // initDanmakuTextButton();
 
         api.on(READY, function () {
             $current.show();
